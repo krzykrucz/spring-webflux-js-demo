@@ -1,0 +1,50 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <title>Find your Friends</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+
+        <link rel="stylesheet" href="css/stream.css"/>
+
+        <script src="https://unpkg.com/vue"></script>
+        <script src="https://unpkg.com/lodash"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/rxjs/4.0.7/rx.lite.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/rxjs-dom/7.0.3/rx.dom.min.js"></script>
+    </head>
+
+    <body>
+        <div id="root">
+            <div class="header">
+                <img src="spring.png" class="logo">
+                <div class="header-text">Clock demo</div>
+            </div>
+            <div v-if="time" class="time">
+                {{time}}
+            </div>
+        </div>
+    </body>
+    <script>
+        new Vue({
+            el: '#root',
+            data() {
+                return {
+                    time: null
+                }
+            },
+            mounted() {
+                const self = this
+                Rx.DOM.fromEventSource('http://localhost:8080/time')
+                    .subscribe(
+                        data => {
+                            const {year, monthValue, dayOfMonth, hour, minute, second} = JSON.parse(data).dateTime
+                            self.time = new Date(year, monthValue, dayOfMonth, hour, minute, second).toLocaleString()
+                        },
+                        exception => {
+                            console.error('request failed')
+                        }
+                    )
+            }
+        });
+    </script>
+
+</html>

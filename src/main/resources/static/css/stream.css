@@ -1,0 +1,38 @@
+
+body {
+    background: #f5f5f5;
+    font-family: Montserrat, sans-serif;
+    margin: 0;
+}
+
+.time {
+    display: flex;
+    flex-direction: row;
+    left: 50%;
+    position: relative;
+    margin: 10px;
+    font-size: 65px;
+    transform: translateX(-293px);
+    font-weight: 600;
+    color: rgba(53, 45, 41, 0.87);
+}
+
+.header {
+    display: flex;
+    flex-direction: row;
+    font-size: 40px;
+    font-weight: 600;
+    background-color: #6DB33F;
+    color: #F1F1F1;
+    margin-bottom: 50px;
+    padding: 10px;
+}
+
+.header-text {
+    margin: 25px;
+}
+
+.logo {
+    width: 100px;
+    height: 100px;
+}
